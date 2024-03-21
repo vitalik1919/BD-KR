@@ -1,0 +1,116 @@
+<div class="nav-background">
+  <div class="logo-div">
+    <img class="logo" (click)="navigateTo('')" alt="" src='/assets/logo.png'>
+  </div>
+  <div class="inner-nav">
+    <div class="nav-button" (click)="navigateTo('/profile')" (mouseover)="closeDropdown()" id="profile" >PROFILE </div>
+    <div class="nav-button" (click)="navigateTo('/about_us')" (mouseover)="closeDropdown()" id="about-us">ABOUT US </div>
+    <div class="nav-button" (mouseover)="openDropdown()"  id="trainings">TRAININGS </div>
+    <div class="nav-button" (click)="navigateTo('/shop')" (mouseover)="closeDropdown()" id="shop">SHOP </div>
+  </div>
+  <div class="member-container">
+    <button class="member" (click)="navigateTo('/sign_up')">Become a member</button>
+  </div>
+</div>
+<div class="dropdown-menu" *ngIf="isDropdownOpen" (mouseleave)="closeDropdown()">
+  <ul class="training-options">
+    <li (click)="navigateTo('/subscriptions')"    class="training-item">SUBSCRIPTIONS</li>
+    <li (click)="navigateTo('/trainer_classes')"  class="training-item">TRAINER CLASSES</li>
+    <li (click)="navigateTo('/group_classes')"    class="training-item">GROUP CLASSES</li>
+  </ul>
+</div>
+
+<style>
+
+  .nav-background {
+    background: rgba(0, 0, 0, 0.45);
+    width: 100vw;
+    height: 17vh;
+    margin-left: -0.5vw;
+    margin-top: -1vh;
+    display: flex;
+  }
+  .inner-nav {
+    display: flex;
+    flex-direction: row;
+    align-content: space-evenly;
+    justify-content: center;
+    width: 100%;
+    margin-left: 100px;
+  }
+  .logo {
+    width: 6.25vw;
+    height: 12vh;
+  }
+  .logo:hover {
+    cursor: pointer;
+  }
+  .logo-div {
+    padding-top: 3.3vh;
+    padding-left: 20px;
+  }
+  .nav-button {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 575;
+    font-style: normal;
+    margin-right: 10%;
+    font-size: 1.75vw;
+    margin-top: 5.25vh;
+  }
+  .nav-button:hover {
+    color: #52CD99;
+    cursor: pointer;
+  }
+  .member-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+  .member {
+    margin-top: 3.3vh;
+    margin-right: 1.5vw;
+    width: 10vw;
+    height: 10vh;
+    background-color: #3B9972;
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 575;
+    font-style: normal;
+    font-size: 1.35vw;
+    border-radius: 0.5vw;
+    border: none;
+  }
+  .member:hover {
+    background-color: #40a67b;
+    cursor: pointer;
+  }
+  .member:active {
+    background-color: #45b686;
+  }
+  .dropdown-menu {
+    margin-left: 48.5vw;
+    margin-top: -20vh;
+    background: rgba(0, 0, 0, 0.45);
+    width: 12.5vw;
+    height: 65vh;
+  }
+  .training-options {
+    list-style-type: none;
+    padding-top: 22.5vh;
+    margin-left: -2.5vw;
+    text-align: center;
+  }
+  .training-item {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 575;
+    font-style: normal;
+    font-size: 1.4vw;
+    margin-bottom: 10vh;
+  }
+  .training-item:hover {
+    color: #52CD99;
+    cursor: pointer;
+  }
+</style>
