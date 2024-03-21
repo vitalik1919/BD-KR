@@ -1,1 +1,182 @@
-<p>sign-up works!</p>
+<div class="form-container">
+  <div class="form-background">
+    <img class="signup-logo" alt="" src="/assets/logo.png"/>
+    <div class="form-content">
+
+      <div class="signup-row">
+        <div class="input-container">
+          <div class="input-text">Username</div>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+
+      <div class="signup-row">
+        <div class="input-container">
+          <div class="input-text">First Name</div>
+          <input type="text" class="field-input">
+        </div>
+        <div class="input-container">
+          <div class="input-text">Last Name</div>
+          <input type="text" class="field-input">
+        </div>
+      </div>
+
+      <div class="signup-row">
+        <div class="input-container">
+          <div class="input-text">Date of Birth</div>
+          <input type="date" class="field-input">
+        </div>
+        <div class="input-container">
+          <div class="input-text">Gender</div>
+          <select class="field-input">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="signup-row">
+        <div class="input-container">
+          <div class="input-text">Password</div>
+          <input type="password" class="field-input">
+        </div>
+        <div class="input-container">
+          <div class="input-text">Confirm Password</div>
+          <input type="password" class="field-input">
+        </div>
+      </div>
+
+      <div class="button-row">
+        <div class="footer-text">Already have an account?
+          <a class="login-click" (click)="navigateTo('/login')">Login</a>
+        </div>
+        <button class="cancel" (click)="navigateTo('/')">CANCEL</button>
+        <button class="signup">SIGN UP</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+
+  .form-container {
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .form-background {
+    margin-left: 10vw;
+    margin-top: 10vh;
+    background-color: rgba(0, 0, 0, 0.45);
+    width: 60%;
+    height: 90%;
+    border-radius: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .signup-logo {
+    scale: 0.9;
+    padding-top: 2vh;
+  }
+  .form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1vw;
+    margin-top: -1.5vh;
+  }
+  .signup-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2vw;
+  }
+  .field-input {
+    background-color: rgba(0, 0, 0, 0.65);
+    border: none;
+    border-radius: 0.5vw;
+    width: 22.5vw;
+    height: 7vh;
+    color: #BEBEBE;
+    font-size: 1vw;
+  }
+  .input-text {
+    color: #BEBEBE;
+    font-family: "Ruda", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    padding-bottom: 0.7vh;
+    font-size: 1vw;
+  }
+
+  .button-row {
+    width: 102.5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1vw;
+    margin-top: 2.5vh;
+  }
+  .cancel {
+    color: #8d8d8d;
+    background-color: #BEBEBE;
+    border: none;
+    border-radius: 0.35vw;
+    font-family: "Pragati Narrow", sans-serif;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 1vw;
+    width: 5vw;
+    height: 5vh;
+  }
+  .cancel:hover {
+    color: #a4a4a4;
+    background-color: #727272;
+    cursor: pointer;
+  }
+  .cancel:active {
+    background-color: #626262;
+  }
+  .signup {
+    color: #ffffff;
+    background-color: #3B9972;
+    border: none;
+    border-radius: 0.35vw;
+    font-family: "Pragati Narrow", sans-serif;
+    font-style: normal;
+    font-size: 1vw;
+    width: 5vw;
+    height: 5vh;
+  }
+  .signup:hover {
+    background-color: #40a67b;
+    cursor: pointer;
+  }
+  .signup:active {
+    background-color: #45b686;
+  }
+  .footer-text {
+    color: #52CD99;
+    font-family: "Ruda", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1vw;
+    margin-right: 20vw;
+  }
+  .login-click {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .login-click:hover {
+    color: #57ecad;
+  }
+</style>

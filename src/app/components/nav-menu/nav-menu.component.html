@@ -50,9 +50,10 @@
     padding-left: 20px;
   }
   .nav-button {
+    z-index: 1;
     color: white;
     font-family: "Pragati Narrow", sans-serif;
-    font-weight: 575;
+    font-weight: 600;
     font-style: normal;
     margin-right: 10%;
     font-size: 1.75vw;
@@ -70,7 +71,7 @@
   .member {
     margin-top: 3.3vh;
     margin-right: 1.5vw;
-    width: 10vw;
+    width: 11vw;
     height: 10vh;
     background-color: #3B9972;
     color: white;
@@ -89,6 +90,8 @@
     background-color: #45b686;
   }
   .dropdown-menu {
+    z-index: 0;
+    position: absolute;
     margin-left: 48.5vw;
     margin-top: -20vh;
     background: rgba(0, 0, 0, 0.45);
@@ -98,7 +101,7 @@
   .training-options {
     list-style-type: none;
     padding-top: 22.5vh;
-    margin-left: -2.5vw;
+    margin-left: -2.4vw;
     text-align: center;
   }
   .training-item {
@@ -108,6 +111,7 @@
     font-style: normal;
     font-size: 1.4vw;
     margin-bottom: 10vh;
+    margin-left: -0.55vw;
   }
   .training-item:hover {
     color: #52CD99;
