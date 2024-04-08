@@ -1,0 +1,163 @@
+<app-nav-menu></app-nav-menu>
+<div class="container">
+
+  <div class="profile-bar">
+
+    <span class="title">JOHN DOE</span>
+    <div class="line"></div>
+
+    <div class="profile-content">
+      <span class="text">Gender: M</span>
+      <span class="text">Date of Birth: 01.01.1990</span>
+      <span class="text">Current Plan: Morning Regular</span>
+      <div class="line bot-line"></div>
+    </div>
+
+  </div>
+
+  <div class="main-section">
+
+    <span class="main-title">Planned Trainings</span>
+
+    <div class="table-body-container">
+      <table class="my-table">
+        <thead>
+        <tr>
+          <th class="header-cell">Trainer</th>
+          <th class="header-cell">Time of the Day</th>
+          <th class="header-cell">Weekdays</th>
+        </tr>
+        </thead>
+        <!-- Table body -->
+        <tbody>
+          <tr *ngFor="let _ of [1,2,3,4,5,6,7,8]">
+            <td class="cell">John Doe</td>
+            <td class="cell">09:00-10:00</td>
+            <td class="cell">MON, WED, FRI</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+
+  .container {
+    padding-top: 20vh;
+    padding-left: 2vw;
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+  }
+  .my-table {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0.3vw;
+  }
+  tr {
+    max-height: 10%;
+  }
+  th {
+    width: 10vw;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .header-cell {
+    background: #40a67b !important;
+    border: 0.15vw solid black;
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.7vw;
+    text-align: center;
+    letter-spacing: 0.1vw;
+    text-transform: uppercase;
+  }
+  .cell {
+    width: 6vw;
+    height: 7.5vh;
+    background: rgba(0,0,0,0.60);
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.4vw;
+    text-align: center;
+    letter-spacing: 0.1vw;
+    text-transform: uppercase;
+    border: 0.15vw solid black;
+  }
+  .main-section {
+    width: 72vw;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 22vw;
+  }
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5vh;
+    height: 100%;
+  }
+  .main-title {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2.25vw;
+    line-height: 2;
+    letter-spacing: 0.3vw;
+    text-transform: uppercase;
+  }
+  .title {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2.25vw;
+    line-height: 2;
+    letter-spacing: 0.3vw;
+    padding-left: 4.25vw;
+  }
+  .text {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5vw;
+    line-height: 2;
+    padding-left: 1vw;
+  }
+  .line {
+    background: white;
+    width: 100%;
+    height: 0.1vh;
+  }
+  .bot-line {
+    margin-top: 15vh;
+  }
+  .profile-bar {
+    width: 20vw;
+    height: 75vh;
+    background: rgba(0,0,0,0.45);
+    border: none;
+    border-radius: 0.6vw;
+    position: fixed;
+  }
+  .table-body-container {
+    height: 80%;
+    width: 80%;
+    overflow-y: auto;
+  }
+</style>
