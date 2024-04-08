@@ -16,8 +16,253 @@
     UNTIL<span class="highlight"> YOU</span> STOP<br/>TRYING</div>
 </div>
 
+<div class="map-section">
+  <div class="title map-title">
+    FIND <span class="highlight">US</span> ON A MAP
+  </div>
+  <div class="map-pic"></div>
+</div>
+
+<div class="review-section">
+
+  <div class="reviews-inner">
+
+    <div class="contact-window">
+        <div class="contact-title">Contact us via</div>
+        <div class="icons">
+          <img alt="i" src="assets/instagram-logo.png"/>
+          <img alt="i" src="assets/facebook-logo.png"/>
+          <img alt="i" src="assets/twitter-logo.png"/>
+          <img alt="i" src="assets/discord-logo.png"/>
+        </div>
+      <div class="contact-title">or leave a review</div>
+
+      <input class="text-field" type="text" placeholder="Enter your message here...">
+      <div class="ranking-container">
+        <div class="stars">
+
+          <input type="radio" class="star" id="one" name="rating" value="1">
+          <label for="one" class="star-label">&#9733;</label>
+          <input type="radio" class="star" id="two" name="rating" value="2">
+          <label for="two" class="star-label">&#9733;</label>
+          <input type="radio" class="star" id="three" name="rating" value="3">
+          <label for="three" class="star-label">&#9733;</label>
+          <input type="radio" class="star" id="four" name="rating" value="4">
+          <label for="four" class="star-label">&#9733;</label>
+          <input type="radio" class="star" id="five" name="rating" value="5">
+          <label for="five" class="star-label">&#9733;</label>
+
+        </div>
+        <button class="reviews-button">SEND</button>
+      </div>
+    </div>
+
+    <div class="reviews-window">
+
+      <div class="review-cards" *ngFor="let _ of [1,2,3]">
+
+        <div class="card">
+          <div class="title-part">
+
+            <span class="rUser">USERNAME</span>
+
+            <div class="rating">
+              <label class="star-label">&#9733;</label>
+              <label class="star-label">&#9733;</label>
+              <label class="star-label">&#9733;</label>
+              <label class="star-label">&#9733;</label>
+              <label class="star-label">&#9733;</label>
+            </div>
+
+          </div>
+          <div class="text-part">
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="review-window-buttons">
+        <button class="reviews-button">PREV</button>
+        <button class="reviews-button">NEXT</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
 <style>
 
+  .rUser {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 575;
+    font-style: normal;
+    font-size: 1vw;
+    text-align: center;
+    padding: 0.5vw;
+  }
+  .rating {
+    margin-top: -1.3vh;
+  }
+  .title-part {
+    width: 100%;
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.2vw;
+  }
+  .review-cards {
+    padding: 1vw;
+  }
+  .card {
+    width: 100%;
+    height: 17.5vh;
+    background: rgba(0,0,0,0.60);
+    border: none;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+  }
+
+  .review-window-buttons {
+    display: flex;
+    gap: 0.5vw;
+    justify-content: flex-end;
+    padding-right: 1.3vw;
+  }
+  .reviews-window {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ranking-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    padding-left: 9.5vw;
+  }
+  .reviews-button {
+    margin-top: 0.7vw;
+    text-align: center;
+    width: 5vw;
+    height: 4.5vh;
+    background-color: #3B9972;
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 575;
+    font-style: normal;
+    font-size: 1.1vw;
+    border-radius: 0.5vw;
+    line-height: 1.7;
+    border: none;
+  }
+  .reviews-button:hover {
+    cursor: pointer;
+    background-color: #40a67b;
+  }
+  .reviews-button:active {
+    background-color: #45b686;
+  }
+  .stars input {
+    display: none;
+  }
+  .star-label {
+    font-size: 2.25vw;
+    cursor: pointer;
+    color: #ffbe1d;
+  }
+  .text-field {
+    width: 25vw;
+    height: 20vh;
+    border: none;
+    border-radius: 10px;
+    text-align: left;
+    word-wrap: break-word;
+  }
+
+  .contact-title {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.7vw;
+    line-height: 1;
+    letter-spacing: 0.3vw;
+    text-align: justify;
+    margin-top: 3%;
+    margin-bottom: 3%;
+  }
+  .icons {
+    display: flex;
+    flex-direction: row;
+    align-content: space-evenly;
+    gap: 15%;
+    margin-left: -17.5%;
+  }
+  .reviews-inner {
+    width: 99vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+  }
+  .contact-window {
+    background: rgba(0,0,0,0.60);
+    border: none;
+    border-radius: 15px;
+    width: 50vw;
+    height: 70vh;
+    margin-top: 9%;
+    margin-left: 6%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reviews-window {
+    width: 37.5vw;
+    height: 70vh;
+    margin-left: 3%;
+    margin-top: 8%;
+  }
+
+  .mid-section {
+    padding-top: 7.5%;
+  }
+  .map-section {
+    margin-left: -1%;
+    margin-top: 17.5vh;
+    width: 99.2vw;
+    height: 100vh;
+    margin-bottom: -1vh;
+    background-color: rgba(0, 0, 0, 0.60);
+  }
+  .map-title {
+    margin-left: 5vw;
+    padding-top: 5vh;
+  }
+  .map-pic {
+    background-image: url("/assets/map.JPG");
+    width: 70vw;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+    margin-top: 2.5%;
+    border-radius: 15px;
+    border: none;
+  }
+
+  .review-section {
+    margin-left: -1%;
+    margin-top: 17.5vh;
+    width: 99.2vw;
+    height: 100vh;
+    margin-bottom: -1vh;
+  }
   .top-part {
     margin-left: 2.5vw;
     margin-top: 2.5vw;

@@ -2,5 +2,6 @@ body {
   background-image: url('/assets/back_image.png');
   background-size: 100vw 105vh;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 

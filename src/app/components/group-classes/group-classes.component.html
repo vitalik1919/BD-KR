@@ -1,1 +1,60 @@
-<p>group-classes works!</p>
+<app-nav-menu></app-nav-menu>
+
+<div class="table-container">
+  <table>
+    <tr>
+      <th class="corner"></th>
+      <th class="header-cell" *ngFor="let day of ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']">
+        <span class="cell-text">{{ day }}</span>
+      </th>
+    </tr>
+    <ng-container *ngFor="let hour of ['10:00', '12:00', '14:00', '16:00', '18:00']">
+      <tr>
+        <th class="header-cell"><span class="cell-text">{{ hour }}</span></th>
+        <td class="cell" *ngFor="let _ of [0,1,2,3,4,5]"></td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
+
+<style>
+
+  .table-container {
+    padding-top: 20vh;
+    padding-left: 15.5vw;
+  }
+  table {
+    width: 80%;
+    height: 80%;
+    border-spacing: 0.3vw;
+  }
+
+  .cell-text {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.7vw;
+    text-align: center;
+    letter-spacing: 0.1vw;
+    text-transform: uppercase;
+  }
+
+  .corner {
+    width: 8.5vw;
+    height: 11.5vh;
+    background: #27724f;
+    opacity: 50%;
+    border: 0.15vw solid black;
+  }
+  .header-cell {
+    background: #40a67b !important;
+    border: 0.15vw solid black;
+  }
+  .cell {
+    width: 8.5vw;
+    height: 11.5vh;
+    background: rgba(0,0,0,0.60);
+  }
+
+</style>
