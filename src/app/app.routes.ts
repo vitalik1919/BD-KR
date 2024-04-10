@@ -16,7 +16,6 @@ export const routes: Routes = [
   { path: 'subscriptions',      component: SubscriptionsComponent},
   { path: 'trainer_classes',    component: TrainerClassesComponent},
   { path: 'group_classes',      component: GroupClassesComponent},
-  { path: 'shop',               component: ShopComponent},
   { path: 'sign_up',            component: SignUpComponent},
   { path: 'login',              component: LoginComponent}
 ];

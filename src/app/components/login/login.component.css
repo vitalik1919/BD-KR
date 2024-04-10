@@ -1,0 +1,120 @@
+.form-container {
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-background {
+  margin-left: 10vw;
+  margin-top: 10vh;
+  background-color: rgba(0, 0, 0, 0.45);
+  width: 30%;
+  height: 90%;
+  border-radius: 0.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.signup-logo {
+  scale: 0.9;
+  padding-top: 2vh;
+}
+.form-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+  margin-top: -1.5vh;
+}
+.login-fields {
+
+}
+.field-input {
+  background-color: rgba(0, 0, 0, 0.65);
+  border: none;
+  border-radius: 0.5vw;
+  width: 22.5vw;
+  height: 7vh;
+  color: #BEBEBE;
+  font-size: 1vw;
+}
+.input-text {
+  color: #BEBEBE;
+  font-family: "Ruda", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  padding-bottom: 0.7vh;
+  font-size: 1vw;
+  margin-top: 2vh;
+}
+.button-row {
+  width: 49vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1vw;
+}
+.cancel {
+  color: #8d8d8d;
+  background-color: #BEBEBE;
+  border: none;
+  border-radius: 0.35vw;
+  font-family: "Pragati Narrow", sans-serif;
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 1vw;
+  width: 5vw;
+  height: 5vh;
+}
+.cancel:hover {
+  color: #a4a4a4;
+  background-color: #727272;
+  cursor: pointer;
+}
+.cancel:active {
+  background-color: #626262;
+}
+.login {
+  color: #ffffff;
+  background-color: #3B9972;
+  border: none;
+  border-radius: 0.35vw;
+  font-family: "Pragati Narrow", sans-serif;
+  font-style: normal;
+  font-size: 1vw;
+  width: 5vw;
+  height: 5vh;
+}
+.login:hover {
+  background-color: #40a67b;
+  cursor: pointer;
+}
+.login:active {
+  background-color: #45b686;
+}
+.form-footer {
+  width: 100%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.footer-text {
+  color: #52CD99;
+  font-family: "Ruda", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1vw;
+}
+.login-click {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.login-click:hover {
+  color: #57ecad;
+}
