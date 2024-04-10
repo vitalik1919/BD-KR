@@ -8,11 +8,14 @@ import {SignUpComponent} from "./components/sign-up/sign-up.component";
 import {HomeComponent} from "./components/home/home.component";
 import {LoginComponent} from "./components/login/login.component";
 import {CustomerProfileComponent} from "./components/customer-profile/customer-profile.component";
+import {AdminProfileComponent} from "./components/admin-profile/admin-profile.component";
+import {TrainerProfileComponent} from "./components/trainer-profile/trainer-profile.component";
 
 export const routes: Routes = [
   { path: '',                   component: HomeComponent},
-  { path: 'profile',            component: ProfileComponent},
   { path: 'customer_profile',   component: CustomerProfileComponent},
+  { path: 'admin_profile',      component: AdminProfileComponent},
+  { path: 'trainer_profile',    component: TrainerProfileComponent},
   { path: 'subscriptions',      component: SubscriptionsComponent},
   { path: 'trainer_classes',    component: TrainerClassesComponent},
   { path: 'group_classes',      component: GroupClassesComponent},

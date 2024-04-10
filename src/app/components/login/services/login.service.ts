@@ -21,46 +21,17 @@ export class LoginService {
 
   getProfile(jwtToken : string): Observable<any> {
 
-    return this.getUser(jwtToken).pipe(
-
-      map(user => {
-
-        switch(user.role) {
-
-          case Role.CUSTOMER: {
-            console.log("customer")
-            break
-          }
-          case Role.ADMIN: {
-            console.log("admin")
-            break
-          }
-          case Role.TRAINER: {
-            console.log("trainer")
-            break
-          }
-          default: {
-            break
-          }
-
-        }
-        return user;
-      })
-    );
-
-  }
-
-  getUser(jwtToken : string) : Observable<User> {
-
+    const token = this.getToken()
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${jwtToken}`
+      'Authorization': `Bearer ${token}`
     });
-    return this.http.get<any>('http://localhost:3000/auth/profile', { headers: headers }).pipe(
-      map(data => {
-        return new User(data.id, data.role);
-      })
-    );
+    const user = this.http.get<any>('http://localhost:3000/auth/profile', { headers: headers})
+    return user;
   }
 
+  getToken() {
+    const jwtToken = localStorage.getItem("jwt");
+    return jwtToken ? JSON.parse(jwtToken) : null;
+  }
 
 }

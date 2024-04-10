@@ -3,12 +3,12 @@
     <img class="logo" (click)="navigateTo('')" alt="" src='/assets/logo.png'>
   </div>
   <div class="inner-nav">
-    <div class="nav-button" (click)="navigateTo('/profile')" (mouseover)="closeDropdown()" id="profile" >PROFILE </div>
+    <div class="nav-button" (click)="navigateToProfile()" (mouseover)="closeDropdown()" id="profile" >PROFILE </div>
     <div class="nav-button" (click)="navigateTo('')" (mouseover)="closeDropdown()" id="home">ABOUT US </div>
     <div class="nav-button" (mouseover)="openDropdown()"  id="trainings">TRAININGS </div>
   </div>
   <div class="member-container">
-    <button class="member" (click)="navigateTo('/sign_up')">Become a member</button>
+    <button class="member" (click)="manageAccountState()">{{ this.memberText }}</button>
   </div>
 </div>
 <div class="dropdown-menu" *ngIf="isDropdownOpen" (mouseleave)="closeDropdown()">
