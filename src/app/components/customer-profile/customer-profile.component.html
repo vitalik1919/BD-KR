@@ -3,13 +3,15 @@
 
   <div class="profile-bar">
 
-    <span class="title">JOHN DOE</span>
+    <div class="name-container">
+      <span class="title">{{currentCustomer.firstName + ' ' + currentCustomer.lastName}}</span>
+    </div>
     <div class="line"></div>
 
     <div class="profile-content">
-      <span class="text">Gender: M</span>
-      <span class="text">Date of Birth: 01.01.1990</span>
-      <span class="text">Current Plan: Morning Regular</span>
+      <span class="text">Gender: {{ currentCustomer.gender === 0 ? 'Male' : currentCustomer.gender === 1 ? 'Female' : 'Other' }}</span>
+      <span class="text">Date of Birth: {{currentCustomer.dateOfBirth}}</span>
+      <span class="text">Current Plan: {{currentSub}}</span>
       <div class="line bot-line"></div>
     </div>
 
@@ -30,10 +32,10 @@
         </thead>
         <!-- Table body -->
         <tbody>
-          <tr *ngFor="let _ of [1,2,3,4,5,6,7,8]">
-            <td class="cell">John Doe</td>
-            <td class="cell">09:00-10:00</td>
-            <td class="cell">MON, WED, FRI</td>
+          <tr *ngFor="let tclass of this.trainerClasses">
+            <td class="cell">{{ tclass.fname + ' ' + tclass.lname }}</td>
+            <td class="cell">{{ tclass.start_time + '-' + tclass.end_time }}</td>
+            <td class="cell">{{tclass.weekdays.join(', ')}}</td>
           </tr>
 
         </tbody>
@@ -120,6 +122,12 @@
     letter-spacing: 0.3vw;
     text-transform: uppercase;
   }
+  .name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
   .title {
     color: white;
     font-family: "Pragati Narrow", sans-serif;
@@ -128,7 +136,6 @@
     font-size: 2.25vw;
     line-height: 2;
     letter-spacing: 0.3vw;
-    padding-left: 4.25vw;
   }
   .text {
     color: white;

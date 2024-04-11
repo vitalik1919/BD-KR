@@ -1,3 +1,5 @@
+import {CustomerProfileComponent} from "../components/customer-profile/customer-profile.component";
+
 export enum Gender {
   MALE,
   FEMALE,

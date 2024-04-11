@@ -4,6 +4,7 @@ import {LoginService} from "./services/login.service";
 import {Customer} from "../../entities/customer";
 import {Admin} from "../../entities/admin";
 import {Trainer} from "../../entities/trainer";
+import {CustomerProfileComponent} from "../customer-profile/customer-profile.component";
 
 @Component({
   selector: 'app-login',
@@ -61,7 +62,13 @@ export class LoginComponent {
             break
           }
           case 2: {
-            let trainer = new Trainer()
+            let trainer = new Trainer(
+              profile.data.id,
+              profile.data.first_name,
+              profile.data.last_name,
+              profile.data.wage,
+              profile.data.specialty
+            )
             console.log(trainer)
             localStorage.setItem("user", JSON.stringify(trainer))
             break
