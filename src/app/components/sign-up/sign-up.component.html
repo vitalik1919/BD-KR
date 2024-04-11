@@ -6,32 +6,32 @@
       <div class="signup-row">
         <div class="input-container">
           <div class="input-text">Username</div>
-          <input type="text" class="field-input">
+          <input type="text" class="field-input" [(ngModel)]="userData.username">
         </div>
       </div>
 
       <div class="signup-row">
         <div class="input-container">
           <div class="input-text">First Name</div>
-          <input type="text" class="field-input">
+          <input type="text" class="field-input" [(ngModel)]="userData.first_name">
         </div>
         <div class="input-container">
           <div class="input-text">Last Name</div>
-          <input type="text" class="field-input">
+          <input type="text" class="field-input" [(ngModel)]="userData.last_name">
         </div>
       </div>
 
       <div class="signup-row">
         <div class="input-container">
           <div class="input-text">Date of Birth</div>
-          <input type="date" class="field-input">
+          <input type="date" class="field-input" [(ngModel)]="userData.date_of_birth">
         </div>
         <div class="input-container">
           <div class="input-text">Gender</div>
-          <select class="field-input">
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
+          <select class="field-input" [(ngModel)]="userData.gender">
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+            <option value="2">Other</option>
           </select>
         </div>
       </div>
@@ -39,11 +39,11 @@
       <div class="signup-row">
         <div class="input-container">
           <div class="input-text">Password</div>
-          <input type="password" class="field-input">
+          <input type="password" class="field-input" [(ngModel)]="userData.password">
         </div>
         <div class="input-container">
           <div class="input-text">Confirm Password</div>
-          <input type="password" class="field-input">
+          <input type="password" class="field-input" [(ngModel)]="confirm">
         </div>
       </div>
 
@@ -52,7 +52,7 @@
           <a class="login-click" (click)="navigateTo('/login')">Login</a>
         </div>
         <button class="cancel" (click)="navigateTo('/')">CANCEL</button>
-        <button class="signup">SIGN UP</button>
+        <button class="signup" (click)="trySignUp()">SIGN UP</button>
       </div>
 
     </div>
