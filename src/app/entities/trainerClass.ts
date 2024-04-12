@@ -1,8 +1,12 @@
 export class TrainerClass {
 
-  constructor(private _fname : string, private _lname : string, private _price : number, private _start_time : string,
+  constructor(private _id : number, private _fname : string, private _lname : string, private _price : number, private _start_time : string,
               private _end_time : string, private _weekdays : string[]) { }
 
+
+  get id(): number {
+    return this._id;
+  }
 
   get price(): number {
     return this._price;

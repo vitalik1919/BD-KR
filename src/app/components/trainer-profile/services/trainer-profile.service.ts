@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {map, Observable} from "rxjs";
-import {TrainerClass} from "../../../entities/TrainerClass";
+import {TrainerClass} from "../../../entities/trainerClass";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -14,6 +14,7 @@ export class TrainerProfileService {
     return this.http.get<any[]>(`http://localhost:3000/trainer-classes/trainer/${id}`).pipe(
       map(response => {
         return response.map(item => new TrainerClass(
+          item.trainerClass_id,
           item.customer_first_name,
           item.customer_last_name,
           item.trainerClass_price,

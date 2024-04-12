@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavMenuComponent} from "../nav-menu/nav-menu.component";
 import {NgForOf} from "@angular/common";
-import {TrainerClass} from "../../entities/TrainerClass";
+import {TrainerClass} from "../../entities/trainerClass";
 import {Trainer} from "../../entities/trainer";
 import {TrainerProfileService} from "./services/trainer-profile.service";
 

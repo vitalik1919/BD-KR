@@ -3,7 +3,7 @@ import {NavMenuComponent} from "../nav-menu/nav-menu.component";
 import {NgForOf} from "@angular/common";
 import {Customer} from "../../entities/customer";
 import {CustomerProfileService} from "./services/customer-profile.service";
-import {TrainerClass} from "../../entities/TrainerClass";
+import {TrainerClass} from "../../entities/trainerClass";
 
 @Component({
   selector: 'app-customer-profile',
