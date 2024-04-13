@@ -63,10 +63,10 @@
       <div class="group-content" *ngIf="timeShow">
 
         <div class="group-row">
-          <span class="group-item">Start time:</span><input type="time" name="startTime" [(ngModel)]="filterDTO.startTime" (ngModelChange)="onTimeChange()">
+          <span class="group-item">Start time:</span><input type="time" name="startTime" [(ngModel)]="filterDTO.startTime">
         </div>
         <div class="group-row">
-          <span class="group-item">End time:</span><input type="time" name="endTime" [(ngModel)]="filterDTO.endTime" (ngModelChange)="onTimeChange()">
+          <span class="group-item">End time:</span><input type="time" name="endTime" [(ngModel)]="filterDTO.endTime">
         </div>
 
       </div>

@@ -3,6 +3,7 @@ import {map} from "rxjs";
 import {TrainerClass} from "../../../entities/trainerClass";
 import {HttpClient} from "@angular/common/http";
 import {Customer, Gender} from "../../../entities/customer";
+import {TrainerClassFilterDTO} from "../../../entities/trainerClassFilterDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,31 @@ export class TrainerClassesService {
 
     console.log(customer)
     return this.http.patch<any>(`http://localhost:3000/trainer-classes/customer/${id}`, trainerClassDTO)
+  }
+
+  filterClasses(filterDTO : TrainerClassFilterDTO) {
+
+    const filterData = {
+      minPrice: filterDTO.minPrice,
+      maxPrice: filterDTO.maxPrice,
+      chosenWeekdays: filterDTO.chosenWeekdays,
+      startTime: filterDTO.startTime,
+      endTime: filterDTO.endTime
+    }
+
+    return this.http.post<any[]>(`http://localhost:3000/trainer-classes/filtered`, filterData).pipe(
+      map(response => {
+        console.log(response)
+        return response.map(item => new TrainerClass(
+          item.id,
+          item.trainer.first_name,
+          item.trainer.last_name,
+          item.price,
+          item.start_time,
+          item.end_time,
+          item.weekdays.weekdays
+        ));
+      })
+    );
   }
 }

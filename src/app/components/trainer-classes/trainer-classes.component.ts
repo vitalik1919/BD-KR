@@ -72,7 +72,6 @@ export class TrainerClassesComponent implements OnInit {
       });
     });
   }
-
   showPrice() {
     this.priceShow = !this.priceShow
     if(this.priceShow)
@@ -91,7 +90,6 @@ export class TrainerClassesComponent implements OnInit {
       this.arrowSignT = '▼'
     else this.arrowSignT = '⎯'
   }
-
   purchaseClass(id : number) {
 
     let roleJSON = localStorage.getItem('role')
@@ -114,13 +112,11 @@ export class TrainerClassesComponent implements OnInit {
     });
 
   }
-
   onPriceChange(id: string) {
     const selectedOption =
       this.priceOptions.find(option => option.id === id)
 
     if (selectedOption) {
-      console.log(selectedOption)
       this.filterDTO.minPrice = selectedOption.startValue
       this.filterDTO.maxPrice = selectedOption.endValue
     }
@@ -129,22 +125,33 @@ export class TrainerClassesComponent implements OnInit {
     }
   }
   isWeekdaySelected(option: string): boolean {
-    return this.filterDTO.weekdays.includes(option)
+    return this.filterDTO.chosenWeekdays.includes(option)
   }
   onCheckboxChange(option: string) {
-    const index = this.filterDTO.weekdays.indexOf(option);
+    const index = this.filterDTO.chosenWeekdays.indexOf(option);
     if (index === -1) {
-      this.filterDTO.weekdays.push(option);
+      this.filterDTO.chosenWeekdays.push(option);
     } else {
-      this.filterDTO.weekdays.splice(index, 1);
+      this.filterDTO.chosenWeekdays.splice(index, 1);
     }
-    console.log(this.filterDTO.weekdays);
   }
-
-  onTimeChange() {
-  }
-
   applyFilters() {
-
+    this.filterClasses()
+      .then(classes => {
+        console.log(classes)
+        this.trainerClasses = classes;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+  filterClasses(): Promise<TrainerClass[]> {
+    return new Promise((resolve, reject) => {
+      this.trainerClassesService.filterClasses(this.filterDTO).subscribe(classes => {
+        resolve(classes);
+      }, error => {
+        reject(error);
+      });
+    });
   }
 }
