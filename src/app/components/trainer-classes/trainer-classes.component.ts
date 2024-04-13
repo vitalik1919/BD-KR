@@ -138,7 +138,6 @@ export class TrainerClassesComponent implements OnInit {
   applyFilters() {
     this.filterClasses()
       .then(classes => {
-        console.log(classes)
         this.trainerClasses = classes;
       })
       .catch(error => {

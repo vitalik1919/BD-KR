@@ -3,50 +3,72 @@
 <div class="container">
 
   <div class="filter-bar">
-    <span class="title">FILTERS</span>
 
-    <div class="group">
-
-      <div class="line"></div>
-      <span class="group-title">Price</span>
-      <div class="line"></div>
-
-      <div class="group-content">
-
-        <div class="group-row">
-          <span class="group-item">test</span>
-          <input class="group-check" type="checkbox" id="group-checkbox1">
-          <label for="group-checkbox1"><span class="checkmark">&#x2713;</span></label>
-        </div>
-        <div class="group-row">
-          <span class="group-item">test</span>
-          <input class="group-check" type="checkbox" id="group-checkbox2">
-          <label for="group-checkbox2"><span class="checkmark">&#x2713;</span></label>
-        </div>
-        <div class="group-row">
-          <span class="group-item">test</span>
-          <input class="group-check" type="checkbox" id="group-checkbox3">
-          <label for="group-checkbox3"><span class="checkmark">&#x2713;</span></label>
-        </div>
-        <div class="group-row">
-          <span class="group-item">test</span>
-          <input class="group-check" type="checkbox" id="group-checkbox4">
-          <label for="group-checkbox4"><span class="checkmark">&#x2713;</span></label>
-        </div>
-
-      </div>
-
+    <div class="top-part">
+      <span class="title">FILTERS</span>
+      <button class="apply" (click)="applyFilters()">APPLY</button>
     </div>
 
     <div class="group">
 
-      <div class="line"></div>
-      <span class="group-title">Duration</span>
-      <div class="line"></div>
+        <div class="line"></div>
+        <div class="group-row">
+          <span class="group-title">Price</span>
+          <div class="open-group group-item" (click)="showPrice()">{{ this.arrowSignP }}</div>
+        </div>
+        <div class="line"></div>
 
-      <div class="group-content">
+        <ng-container *ngFor="let option of priceOptions">
+          <div class="group-content" *ngIf="priceShow">
+            <div class="group-row">
+              <span class="group-item">{{ option.label }}</span>
+              <input class="group-check" type="radio" [id]="option.id" name="group1" (change)="onPriceChange(option.id)">
+              <label [for]="option.id"><span class="checkmark">&#x2713;</span></label>
+            </div>
+          </div>
+        </ng-container>
 
+    </div>
+    <div class="group">
+
+      <div class="line"></div>
+      <div class="group-row">
+        <span class="group-title">Duration</span>
+        <div class="open-group group-item" (click)="showDays()">{{ this.arrowSignW }}</div>
       </div>
+      <div class="line"></div>
+
+      <ng-container *ngFor="let option of daysOptions">
+        <div class="group-content" *ngIf="daysShow">
+          <div class="group-row">
+            <span class="group-item">{{ option.label }}</span>
+            <input class="group-check" type="checkbox" [id]="option.id" name="group2" [value]="option.value"
+                   [checked]="isDaySelected(option.value)" (change)="onCheckboxChange(option.value)">
+            <label [for]="option.id"><span class="checkmark">&#x2713;</span></label>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+    <div class="group">
+
+      <div class="line"></div>
+      <div class="group-row">
+        <span class="group-title">Time</span>
+        <div class="open-group group-item" (click)="showTime()">{{ this.arrowSignT }}</div>
+      </div>
+      <div class="line"></div>
+
+      <ng-container *ngFor="let option of timeOptions">
+        <div class="group-content" *ngIf="timeShow">
+          <div class="group-row">
+            <span class="group-item">{{ option.label }}</span>
+            <input class="group-check" type="radio" [id]="option.id" name="group3" [value]="option.label"
+                   (change)="onTimeChange(option.id)">
+            <label [for]="option.id"><span class="checkmark">&#x2713;</span></label>
+          </div>
+        </div>
+      </ng-container>
 
     </div>
 
@@ -54,29 +76,50 @@
 
   </div>
 
-
   <div class="cards-section">
-    <ng-container *ngFor="let _ of [].constructor(15); let i = index">
+    <ng-container *ngFor="let sub of subscriptions">
       <div class="card">
         <div class="card-title">
-          <span class="price">35$</span>
-          <span class="card-name">Morning Regular</span>
+          <span class="price">{{sub.price + "$"}}</span>
+          <span class="card-name">{{ sub.type }}</span>
         </div>
         <div class="card-content">
-          <span class="card-text">Duration: - </span>
-          <span class="card-text">Time: - </span>
+          <span class="card-text">Duration: {{sub.days + " days"}} </span>
+          <span class="card-text">Time: {{sub.startTime + "-" + sub.endTime}}</span>
         </div>
         <div class="card-footer">
-          <button class="purchase">PURCHASE</button>
+          <button class="purchase" (click)="purchaseSubscription(sub.id)">PURCHASE</button>
         </div>
       </div>
     </ng-container>
   </div>
-
 </div>
 
 <style>
 
+  .open-group:hover {
+    cursor: pointer;
+  }
+
+  .top-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .apply {
+    margin-right: 0.7vw;
+    margin-top: -0.3vh;
+    width: 4vw;
+    height: 4vh;
+    background-color: #3B9972;
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-style: normal;
+    font-size: 1vw;
+    border-radius: 0.5vw;
+    border: none;
+  }
   .container {
     padding-top: 20vh;
     padding-left: 2vw;
@@ -105,7 +148,7 @@
     font-style: normal;
     font-size: 1.5vw;
     line-height: 2;
-    letter-spacing: 0.3vw;
+    letter-spacing: 0.1vw;
   }
   .price {
     color: white;
@@ -145,11 +188,11 @@
     border-radius: 0.5vw;
     border: none;
   }
-  .purchase:hover {
+  .purchase:hover, .apply:hover  {
     background-color: #40a67b;
     cursor: pointer;
   }
-  .purchase:active {
+  .purchase:active, .apply:active {
     background-color: #45b686;
   }
   .cards-section {
@@ -181,7 +224,7 @@
     font-size: 2.25vw;
     line-height: 2;
     letter-spacing: 0.3vw;
-    padding-left: 5.5vw;
+    padding-left: 1.0vw;
   }
   .group {
     display: flex;
@@ -198,6 +241,9 @@
     align-items: center;
     width: 95%;
   }
+  input[type="radio"] {
+    display: none;
+  }
   input[type="checkbox"] {
     display: none;
   }
@@ -205,16 +251,17 @@
     color: white;
     padding-left: 0.25vw;
     font-weight: bolder;
+    font-size: 1vw;
   }
-  input[type="checkbox"] + label {
+  input[type="radio"] + label, input[type="checkbox"] + label {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 1.4vw;
+    height: 3vh;
     background-color: rgba(90, 90, 90, 0.7);
     border: none;
     cursor: pointer;
   }
-  input[type="checkbox"]:checked + label {
+  input[type="radio"]:checked + label, input[type="checkbox"]:checked + label {
     background-color: #4ce07a;
   }
   .group-item {
@@ -232,7 +279,7 @@
     height: 0.1vh;
   }
   .bot-line {
-    margin-top: 92.5vh;
+    margin-top: 1vh;
   }
   .group-title {
     color: white;
@@ -246,7 +293,7 @@
   }
   .filter-bar {
     width: 20vw;
-    height: 150vh;
+    height: 117.5vh;
     background: rgba(0,0,0,0.45);
     border: none;
     border-radius: 0.6vw;

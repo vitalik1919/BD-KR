@@ -61,7 +61,6 @@ export class TrainerClassesService {
 
     return this.http.post<any[]>(`http://localhost:3000/trainer-classes/filtered`, filterData).pipe(
       map(response => {
-        console.log(response)
         return response.map(item => new TrainerClass(
           item.id,
           item.trainer.first_name,
