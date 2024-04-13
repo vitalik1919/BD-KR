@@ -6,6 +6,7 @@ import {SubscriptionFilterDTO} from "../../entities/subscriptionFilterDTO";
 import {SubscriptionsService} from "./services/subscriptions.service";
 import {Subscription} from "../../entities/subscription";
 import {find, Observable, take} from "rxjs";
+import {parseJson} from "@angular/cli/src/utilities/json-file";
 
 @Component({
   selector: 'app-subscriptions',
@@ -145,6 +146,13 @@ export class SubscriptionsComponent implements OnInit {
     console.log(this.filterDTO)
   }
   purchaseSubscription(id: number) {
+
+    const roleJson = localStorage.getItem('role')
+    const role = roleJson ? parseJson(roleJson) : null
+    if((role as number) !== 0) {
+      alert("You need to login to buy a subscription !")
+      return
+    }
 
     const currSub = this.subscriptions.find(sub => sub.id === id)
 
