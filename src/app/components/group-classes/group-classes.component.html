@@ -8,16 +8,60 @@
         <span class="cell-text">{{ day }}</span>
       </th>
     </tr>
-    <ng-container *ngFor="let hour of ['10:00', '12:00', '14:00', '16:00', '18:00']">
+    <ng-container *ngFor="let row of table; let i = index">
       <tr>
-        <th class="header-cell"><span class="cell-text">{{ hour }}</span></th>
-        <td class="cell" *ngFor="let _ of [0,1,2,3,4,5]"></td>
+        <th class="header-cell"><span class="cell-text">{{ getShortTime(getFirstNonNullStartTime(row)) }}</span></th>
+        <td class="cell" *ngFor="let cell of row; let j = index">
+          <div class="cell-content">
+            <span class="cell-body" *ngIf="cell">{{ cell.type }}</span>
+            <span class="cell-body2" *ngIf="cell">{{ cell.trainer_fname + ' ' + cell.trainer_lname }}</span>
+            <div class="purchase-container">
+              <span class="cell-body2" *ngIf="cell">{{ cell.price + '$'}}</span>
+              <button *ngIf="cell" class="purchase" (click)="purchaseClass(cell)">PURCHASE</button>
+            </div>
+          </div>
+        </td>
       </tr>
     </ng-container>
   </table>
 </div>
 
 <style>
+
+  .purchase-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 0.5vw;
+  }
+  .cell {
+    padding-bottom: 0.6vw;
+  }
+  .cell-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .purchase {
+    width: 3.2vw;
+    height: 3vh;
+    background-color: #3B9972;
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-style: normal;
+    font-size: 0.6vw;
+    border-radius: 0.5vw;
+    border: none;
+  }
+  .purchase:hover  {
+    background-color: #40a67b;
+    cursor: pointer;
+  }
+  .purchase:active {
+    background-color: #45b686;
+  }
 
   .table-container {
     padding-top: 20vh;
@@ -38,6 +82,24 @@
     text-align: center;
     letter-spacing: 0.1vw;
     text-transform: uppercase;
+  }
+  .cell-body {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.3vw;
+    text-align: center;
+    letter-spacing: 0.1vw;
+  }
+  .cell-body2 {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.9vw;
+    text-align: center;
+    letter-spacing: 0.1vw;
   }
 
   .corner {

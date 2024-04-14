@@ -61,6 +61,8 @@ export class SubscriptionsComponent implements OnInit {
       .catch(error => {
         console.error('Error:', error);
       });
+
+
   }
 
   findSubscriptions() : Promise<Subscription[]> {

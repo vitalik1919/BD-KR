@@ -51,24 +51,25 @@
 
     <div class="reviews-window">
 
-      <div class="review-cards" *ngFor="let _ of [1,2,3]">
+      <div class="review-cards" *ngFor="let review of this.reviews">
 
         <div class="card">
           <div class="title-part">
 
-            <span class="rUser">USERNAME &#9733;</span>
-
+            <span class="rUser">{{review.firstName + ' ' + review.lastName}}
+            </span>
+            <div class="rating" *ngFor="let _ of [].constructor(review.rating)">&#9733;</div>
           </div>
           <div class="text-part">
-
+            {{review.description}}
           </div>
         </div>
 
       </div>
 
       <div class="review-window-buttons">
-        <button class="reviews-button">PREV</button>
-        <button class="reviews-button">NEXT</button>
+        <button class="reviews-button" (click)="decrementPageNumber()">PREV</button>
+        <button class="reviews-button" (click)="incrementPageNumber()">NEXT</button>
       </div>
     </div>
 
@@ -78,6 +79,15 @@
 
 <style>
 
+  .text-part {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1.2vw;
+    text-align: start;
+    padding-left: 0.5vw;
+  }
   .star-select {
     background-color: rgba(0, 0, 0, 0.80);
     border: none;
@@ -94,23 +104,31 @@
     width: 90%;
   }
   .rUser {
+    color: #52CD99;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 575;
+    font-style: normal;
+    font-size: 1.2vw;
+    text-align: center;
+    padding: 0.5vw;
+    letter-spacing: 0.1vw;
+  }
+  .rating {
     color: white;
     font-family: "Pragati Narrow", sans-serif;
     font-weight: 575;
     font-style: normal;
-    font-size: 1vw;
+    font-size: 1.35vw;
     text-align: center;
-    padding: 0.5vw;
-  }
-  .rating {
-    display: flex;
-    flex-direction: row;
+    padding-top: 0.3vw;
   }
   .title-part {
     width: 100%;
     height: 25%;
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: 0.2vw;
   }
   .review-cards {

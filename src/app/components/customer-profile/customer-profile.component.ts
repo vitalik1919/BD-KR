@@ -22,6 +22,7 @@ export class CustomerProfileComponent implements OnInit {
   currentCustomer = this.customerObj as Customer
   trainerClasses : TrainerClass[] = []
   currentSub : string = ''
+  currentGroupClass : string = ''
 
   constructor(private profileService : CustomerProfileService) {
   }
@@ -44,6 +45,7 @@ export class CustomerProfileComponent implements OnInit {
         console.error('Error:', error);
       });
     this.findCurrentSubOfCustomer(this.currentCustomer)
+    this.findCurrentGroupClassOfCustomer(this.currentCustomer)
   }
 
   findTrainerClassesOfCustomer(customer: Customer): Promise<TrainerClass[]> {
@@ -59,6 +61,12 @@ export class CustomerProfileComponent implements OnInit {
   findCurrentSubOfCustomer(customer : Customer) {
     this.profileService.findCurrentSubOfCustomer(customer.id).subscribe(currentSub => {
       this.currentSub = currentSub
+    });
+  }
+
+  findCurrentGroupClassOfCustomer(customer : Customer) {
+    this.profileService.findCurrentGroupClassOfCustomer(customer.id).subscribe(currentSub => {
+      this.currentGroupClass = currentSub
     });
   }
 }

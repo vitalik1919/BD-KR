@@ -34,4 +34,12 @@ export class CustomerProfileService {
       })
     );
   }
+
+  findCurrentGroupClassOfCustomer(id: number) : Observable<string>{
+    return this.http.get<any>(`http://localhost:3000/customers/current-group/${id}`).pipe(
+      map(response => {
+        return response.groupClass_type
+      })
+    );
+  }
 }
