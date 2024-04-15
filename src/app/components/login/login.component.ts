@@ -56,7 +56,14 @@ export class LoginComponent {
             break
           }
           case 1: {
-            let admin = new Admin()
+            let admin = new Admin(
+              profile.data.id,
+              profile.data.first_name,
+              profile.data.last_name,
+              profile.data.wage,
+              profile.data.email,
+              profile.data.reg_date
+            )
             console.log(admin)
             localStorage.setItem("user", JSON.stringify(admin))
             break
