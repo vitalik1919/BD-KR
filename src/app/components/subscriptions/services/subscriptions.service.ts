@@ -57,6 +57,9 @@ export class SubscriptionsService {
     return this.http.post<any>(`http://localhost:3000/bought-subscriptions/purchase`, dto)
   }
 
+  deleteSubscription(id : number) {
+    return this.http.delete<void>(`http://localhost:3000/subscriptions/${id}`)
+  }
   filterSubscriptions(filterDTO : SubscriptionFilterDTO) {
 
     const filterData = {

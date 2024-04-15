@@ -88,7 +88,8 @@
           <span class="card-text">Time: {{tclass.start_time + '-' + tclass.end_time}}</span>
         </div>
         <div class="card-footer">
-          <button class="purchase" (click)="purchaseClass(tclass.id)">PURCHASE</button>
+          <button *ngIf="this.role === 0" class="purchase" (click)="purchaseClass(tclass.id)">PURCHASE</button>
+          <button *ngIf="this.role === 1" class="purchase" (click)="deleteClass(tclass.id)">DELETE</button>
         </div>
       </div>
     </ng-container>

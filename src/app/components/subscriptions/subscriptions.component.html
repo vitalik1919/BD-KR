@@ -88,7 +88,8 @@
           <span class="card-text">Time: {{sub.startTime + "-" + sub.endTime}}</span>
         </div>
         <div class="card-footer">
-          <button class="purchase" (click)="purchaseSubscription(sub.id)">PURCHASE</button>
+          <button *ngIf="role === 0" class="purchase" (click)="purchaseSubscription(sub.id)">PURCHASE</button>
+          <button *ngIf="role === 1" class="purchase" (click)="deleteSubscription(sub.id)">DELETE</button>
         </div>
       </div>
     </ng-container>

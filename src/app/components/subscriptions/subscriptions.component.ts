@@ -5,7 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {SubscriptionFilterDTO} from "../../entities/subscriptionFilterDTO";
 import {SubscriptionsService} from "./services/subscriptions.service";
 import {Subscription} from "../../entities/subscription";
-import {find, Observable, take} from "rxjs";
+import {find, Observable, switchMap, take} from "rxjs";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
 
 @Component({
@@ -50,7 +50,7 @@ export class SubscriptionsComponent implements OnInit {
 
   filterDTO : SubscriptionFilterDTO = new SubscriptionFilterDTO()
   subscriptions : Subscription[] = []
-
+  role : number = 3
   constructor(private subscriptionsService : SubscriptionsService) {}
 
   ngOnInit() {
@@ -62,6 +62,9 @@ export class SubscriptionsComponent implements OnInit {
         console.error('Error:', error);
       });
 
+    const roleJSON = localStorage.getItem("role")
+    const roleObj = roleJSON ? parseJson(roleJSON) : null
+    this.role = roleObj as number
 
   }
 
@@ -177,6 +180,29 @@ export class SubscriptionsComponent implements OnInit {
     else {
       return
     }
+  }
+
+  deleteSubscription(id: number) {
+
+    const confirmation = confirm('Are you sure you want to delete this subscription?');
+    if (!confirmation) {
+      return
+    }
+
+    return this.subscriptionsService.deleteSubscription(id).pipe(
+      take(1),
+      switchMap(async () => {
+        this.subscriptions = await this.findSubscriptions();
+      })
+    ).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+      error: (error: any) => {
+        console.error('Error: ', error);
+      },
+      complete: () => {}
+    });
   }
 
 }

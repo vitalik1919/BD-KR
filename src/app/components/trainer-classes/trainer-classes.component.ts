@@ -5,9 +5,10 @@ import {Trainer} from "../../entities/trainer";
 import {TrainerClass} from "../../entities/trainerClass";
 import {TrainerClassesService} from "./services/trainer-classes.service";
 import {Customer} from "../../entities/customer";
-import {Observable, take} from "rxjs";
+import {Observable, switchMap, take} from "rxjs";
 import {FormsModule} from "@angular/forms";
 import {TrainerClassFilterDTO} from "../../entities/trainerClassFilterDTO";
+import {parseJson} from "@angular/cli/src/utilities/json-file";
 
 @Component({
   selector: 'app-trainer-classes',
@@ -49,6 +50,9 @@ export class TrainerClassesComponent implements OnInit {
 
   trainerClasses : TrainerClass[] = []
   filterDTO : TrainerClassFilterDTO = new TrainerClassFilterDTO()
+
+  role : number = 3
+
   constructor(private trainerClassesService : TrainerClassesService)
   {}
 
@@ -61,6 +65,10 @@ export class TrainerClassesComponent implements OnInit {
       .catch(error => {
         console.error('Error:', error);
       });
+
+    const roleJSON = localStorage.getItem("role")
+    const roleObj = roleJSON ? parseJson(roleJSON) : null
+    this.role = roleObj as number
   }
 
   findAvailable(): Promise<TrainerClass[]> {
@@ -151,6 +159,29 @@ export class TrainerClassesComponent implements OnInit {
       }, error => {
         reject(error);
       });
+    });
+  }
+
+  deleteClass(id: number) {
+
+    const confirmation = confirm('Are you sure you want to delete this class?');
+    if (!confirmation) {
+      return
+    }
+
+    return this.trainerClassesService.deleteClass(id).pipe(
+      take(1),
+      switchMap(async () => {
+        await this.findAvailable();
+      })
+    ).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+      error: (error: any) => {
+        console.error('Error: ', error);
+      },
+      complete: () => {}
     });
   }
 }

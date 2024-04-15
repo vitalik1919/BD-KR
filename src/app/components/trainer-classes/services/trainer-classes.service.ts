@@ -73,4 +73,8 @@ export class TrainerClassesService {
       })
     );
   }
+
+  deleteClass(id : number) {
+    return this.http.delete<void>(`http://localhost:3000/trainer-classes/${id}`)
+  }
 }
