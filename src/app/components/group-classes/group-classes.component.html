@@ -17,7 +17,7 @@
             <span class="cell-body2" *ngIf="cell">{{ cell.trainer_fname + ' ' + cell.trainer_lname }}</span>
             <div class="purchase-container">
               <span class="cell-body2" *ngIf="cell">{{ cell.price + '$'}}</span>
-              <button *ngIf="cell" class="purchase" (click)="purchaseClass(cell)">PURCHASE</button>
+              <button *ngIf="cell && role === 0" class="purchase" (click)="purchaseClass(cell)">PURCHASE</button>
             </div>
           </div>
         </td>

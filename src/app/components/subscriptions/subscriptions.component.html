@@ -1,6 +1,57 @@
 <app-nav-menu></app-nav-menu>
 
-<div class="container">
+<div class="darken" *ngIf="isModalOpen">
+  <div class="background">
+
+    <div class="display-container">
+      <div class="header">
+        <span class="modal-title">ADD SUBSCRIPTION</span>
+        <button (click)="closeModal()" class="exit">&#x2716;</button>
+      </div>
+      <div class="line"></div>
+      <div class="input-data">
+        <div class="row">
+          <div class="input-row">
+            <span class="row-text">Type</span>
+            <input type="text" [(ngModel)]="newSubscription.type">
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-row">
+            <span class="row-text">Price</span>
+            <input type="number" [(ngModel)]="newSubscription.price">
+          </div>
+          <div class="input-row">
+            <span class="row-text">Days</span>
+            <select [(ngModel)]="newSubscription.days">
+              <option value=30>30</option>
+              <option value=90>90</option>
+              <option value=180>180</option>
+              <option value=365>365</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-row">
+            <span class="row-text">Start Time</span>
+            <input type="time" [(ngModel)]="newSubscription.startTime">
+          </div>
+          <div class="input-row">
+            <span class="row-text">End Time</span>
+            <input type="time" [(ngModel)]="newSubscription.endTime">
+          </div>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="modal-footer">
+        <button class="create" (click)="addSubscription()">CREATE</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container" *ngIf="!isModalOpen">
 
   <div class="filter-bar">
 
@@ -93,10 +144,172 @@
         </div>
       </div>
     </ng-container>
+    <div class="card" *ngIf="role === 1">
+      <div class="create-container">
+        <button class="add" (click)="openModal()"><span>&#xFF0B;</span></button>
+      </div>
+    </div>
   </div>
+
 </div>
 
 <style>
+
+  .create-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .add {
+    border-radius: 3vw;
+    border: none;
+    width: 5vw;
+    height: 5vw;
+    font-family: "Pragati Narrow", sans-serif;
+    font-style: normal;
+    font-size: 4vw;
+    color: white;
+    background-color: #3B9972;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .add:hover {
+    cursor: pointer;
+    background-color: #40a67b;
+  }
+  .add:active {
+    background-color: #45b686;
+  }
+  .modal-footer {
+    display: flex;
+    align-items: flex-end;
+    width: 98%;
+    height: 100%;
+    padding-top: 1.5vh;
+  }
+  .create {
+    color: #ffffff;
+    background-color: #3B9972;
+    border: none;
+    border-radius: 0.35vw;
+    font-family: "Pragati Narrow", sans-serif;
+    font-style: normal;
+    font-size: 1vw;
+    width: 4.5vw;
+    height: 4.5vh;
+  }
+  .create:hover {
+    background-color: #40a67b;
+    cursor: pointer;
+  }
+  .create:active {
+    background-color: #45b686;
+  }
+  input, select {
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 0.5vw;
+    height: 5vh;
+    color: black;
+    font-size: 1vw;
+  }
+  .row {
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+  }
+  .input-row {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+  }
+  .row-text {
+    color: #BEBEBE;
+    font-family: "Ruda", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    padding-bottom: 0.7vh;
+    font-size: 1vw;
+    margin-top: 2vh;
+  }
+  .input-data {
+    width: 100%;
+    height: 45.5vh;
+    display: flex;
+    flex-direction: column;
+    padding-left: 3vw;
+    padding-top: 3vw;
+  }
+  .line {
+    background: white;
+    width: 100%;
+    height: 0.1vh;
+  }
+  .modal-title {
+    color: white;
+    font-family: "Pragati Narrow", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2.25vw;
+    line-height: 2;
+    letter-spacing: 0.3vw;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    padding-left: 1.5vw;
+    gap: 9vw;
+  }
+  .exit {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2vw;
+    cursor: pointer;
+    margin-top: -0.4vw;
+  }
+  .exit:hover {
+    color: #52CD99;
+  }
+  .darken {
+    margin-left: -1vw;
+    padding-top: 7vh;
+    position: fixed;
+    width: 101vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .background {
+    background-color: rgba(0, 0, 0, 0.60);
+    width: 35%;
+    height: 70%;
+    border: none;
+    border-radius: 0.6vw;
+    box-shadow: 0 0 7px #45b686;
+  }
+  .display-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .modal-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
 
   .open-group:hover {
     cursor: pointer;

@@ -25,7 +25,7 @@ export class GroupClassesComponent implements OnInit {
 
   groupClasses : GroupClass[] = []
   table : any[] = []
-
+  role : number = 3
   ngOnInit() {
 
     this.findGroupClasses()
@@ -38,6 +38,9 @@ export class GroupClassesComponent implements OnInit {
         console.error('Error:', error);
       });
 
+    const roleJSON = localStorage.getItem("role")
+    const roleObj = roleJSON ? parseJson(roleJSON) : null
+    this.role = roleObj as number
 
   }
 

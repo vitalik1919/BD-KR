@@ -5,6 +5,30 @@ export class Subscription {
   }
 
 
+  set id(value: number) {
+    this._id = value;
+  }
+
+  set type(value: string) {
+    this._type = value;
+  }
+
+  set price(value: number) {
+    this._price = value;
+  }
+
+  set days(value: number) {
+    this._days = value;
+  }
+
+  set startTime(value: string) {
+    this._startTime = value;
+  }
+
+  set endTime(value: string) {
+    this._endTime = value;
+  }
+
   get id(): number {
     return this._id;
   }

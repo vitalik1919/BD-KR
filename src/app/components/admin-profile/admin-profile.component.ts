@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavMenuComponent} from "../nav-menu/nav-menu.component";
 import {NgForOf} from "@angular/common";
 import {Admin} from "../../entities/admin";
-import {LineChartModule} from "@swimlane/ngx-charts";
+import {ColorHelper, LineChartModule} from "@swimlane/ngx-charts";
 import {AccountingService} from "./services/accounting.service";
 
 @Component({
@@ -35,25 +35,19 @@ export class AdminProfileComponent implements OnInit {
       this.adminObj._email,
       this.adminObj._regDate
     )
-    // Отримання даних про доходи
-    this.accountingService.getMonthlyIncomeData().subscribe((incomeData: any[]) => {
-      // Отримання даних про витрати
-      this.accountingService.getMonthlyExpenseData().subscribe((expenseData: any[]) => {
-        console.log(incomeData);
-        console.log(expenseData);
 
-        // Формування даних для графіку
+    this.accountingService.getMonthlyExpenseData().subscribe((expenseData: any[]) => {
+      this.accountingService.getMonthlyIncomeData().subscribe((incomeData: any[]) => {
         this.results = [
-          {
-            name: "Incomes",
-            series: incomeData.map(item => ({ value: item.value, name: item.name }))
-          },
           {
             name: "Expenses",
             series: expenseData.map(item => ({ value: item.value, name: item.name }))
+          },
+          {
+            name: "Incomes",
+            series: incomeData.map(item => ({ value: item.value, name: item.name }))
           }
         ];
-
         console.log(this.results);
       }, error => {
         console.error("Error fetching expense data:", error);
@@ -62,7 +56,6 @@ export class AdminProfileComponent implements OnInit {
       console.error("Error fetching income data:", error);
     });
   }
-
   getShortDate(date: string): string {
     return date.substr(0, 10)
   }

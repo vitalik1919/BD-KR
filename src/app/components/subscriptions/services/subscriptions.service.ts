@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import { Subscription } from '../../../entities/subscription';
 import {Customer} from "../../../entities/customer";
 import {SubscriptionFilterDTO} from "../../../entities/subscriptionFilterDTO";
+import {SubscriptionsComponent} from "../subscriptions.component";
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,17 @@ export class SubscriptionsService {
 
   deleteSubscription(id : number) {
     return this.http.delete<void>(`http://localhost:3000/subscriptions/${id}`)
+  }
+  createSubscription(sub : Subscription) {
+
+    const body = {
+      type: sub.type,
+      price: sub.price,
+      days: sub.days,
+      start_time: sub.startTime,
+      end_time: sub.endTime
+    }
+    return this.http.post<void>(`http://localhost:3000/subscriptions`, body)
   }
   filterSubscriptions(filterDTO : SubscriptionFilterDTO) {
 

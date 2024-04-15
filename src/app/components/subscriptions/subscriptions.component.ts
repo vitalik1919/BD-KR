@@ -11,16 +11,22 @@ import {parseJson} from "@angular/cli/src/utilities/json-file";
 @Component({
   selector: 'app-subscriptions',
   standalone: true,
-    imports: [
-        NavMenuComponent,
-        NgForOf,
-        FormsModule,
-        NgIf
-    ],
+  imports: [
+    NavMenuComponent,
+    NgForOf,
+    FormsModule,
+    NgIf
+  ],
   templateUrl: './subscriptions.component.html',
   styleUrl: './subscriptions.component.css'
 })
 export class SubscriptionsComponent implements OnInit {
+
+  newSubscription : Subscription = new Subscription(
+    1, "Regular",
+    20, 30,
+    "07:00:00",
+    "22:00:00")
 
   priceShow : boolean = true
   daysShow : boolean = true
@@ -51,6 +57,8 @@ export class SubscriptionsComponent implements OnInit {
   filterDTO : SubscriptionFilterDTO = new SubscriptionFilterDTO()
   subscriptions : Subscription[] = []
   role : number = 3
+  isModalOpen: boolean = false
+
   constructor(private subscriptionsService : SubscriptionsService) {}
 
   ngOnInit() {
@@ -205,4 +213,29 @@ export class SubscriptionsComponent implements OnInit {
     });
   }
 
+  closeModal() {
+    this.isModalOpen = false
+  }
+
+  openModal() {
+    this.isModalOpen = true
+  }
+
+  addSubscription() {
+    return this.subscriptionsService.createSubscription(this.newSubscription).pipe(
+      take(1),
+      switchMap(async () => {
+        this.subscriptions = await this.findSubscriptions()
+        this.isModalOpen = false
+      })
+    ).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+      error: (error: any) => {
+        console.error('Error: ', error);
+      },
+      complete: () => {}
+    });
+  }
 }
