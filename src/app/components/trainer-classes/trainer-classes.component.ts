@@ -64,7 +64,7 @@ export class TrainerClassesComponent implements OnInit {
   userJSON = localStorage.getItem("user")
   userObj = this.userJSON ? parseJson(this.userJSON) : null
   isModalOpen: boolean = false;
-  newClass: TrainerClass = new TrainerClass(1, this.userObj.first_name, this.userObj._last_name, 25, "07:00", "09:00", [])
+  newClass: TrainerClass = new TrainerClass(1, "", "", 25, "07:00", "09:00", [])
   constructor(private trainerClassesService : TrainerClassesService)
   {}
 
@@ -73,8 +73,9 @@ export class TrainerClassesComponent implements OnInit {
     const roleJSON = localStorage.getItem("role")
     const roleObj = roleJSON ? parseJson(roleJSON) : null
     this.role = roleObj as number
-
     if(this.role === 2) {
+      this.newClass.fname = this.userObj._first_name
+      this.newClass.lname = this.userObj._last_name
       this.findAvailableOfTrainer()
         .then(classes => {
           this.trainerClasses = classes;
@@ -246,7 +247,7 @@ export class TrainerClassesComponent implements OnInit {
       take(1),
       switchMap(async () => {
         this.trainerClasses = await this.findAvailableOfTrainer()
-        this.isModalOpen = false
+        this.closeModal()
       })
     ).subscribe({
       next: (response: any) => {
@@ -261,5 +262,6 @@ export class TrainerClassesComponent implements OnInit {
 
   closeModal() {
     this.isModalOpen = false
+    this.chosenModalWeekdays = []
   }
 }
