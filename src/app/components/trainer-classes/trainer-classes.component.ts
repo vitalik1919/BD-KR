@@ -4,7 +4,6 @@ import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {Trainer} from "../../entities/trainer";
 import {TrainerClass} from "../../entities/trainerClass";
 import {TrainerClassesService} from "./services/trainer-classes.service";
-import {Customer} from "../../entities/customer";
 import {Observable, switchMap, take} from "rxjs";
 import {FormsModule} from "@angular/forms";
 import {TrainerClassFilterDTO} from "../../entities/trainerClassFilterDTO";
@@ -48,15 +47,43 @@ export class TrainerClassesComponent implements OnInit {
     { label: 'Saturday', id: 'group-checkbox10', value: 'SAT' }
   ];
 
+  modalWeekdays = [
+    { label: 'MON', id: 'group-checkbox11', value: 'MON'},
+    { label: 'TUE', id: 'group-checkbox12', value: 'TUE'},
+    { label: 'WED', id: 'group-checkbox13', value: 'WED' },
+    { label: 'THU', id: 'group-checkbox14', value: 'THU' },
+    { label: 'FRI', id: 'group-checkbox15', value: 'FRI' },
+    { label: 'SAT', id: 'group-checkbox16', value: 'SAT' }
+  ]
+  chosenModalWeekdays : string[] = []
+
   trainerClasses : TrainerClass[] = []
   filterDTO : TrainerClassFilterDTO = new TrainerClassFilterDTO()
 
   role : number = 3
-
+  userJSON = localStorage.getItem("user")
+  userObj = this.userJSON ? parseJson(this.userJSON) : null
+  isModalOpen: boolean = false;
+  newClass: TrainerClass = new TrainerClass(1, this.userObj.first_name, this.userObj._last_name, 25, "07:00", "09:00", [])
   constructor(private trainerClassesService : TrainerClassesService)
   {}
 
   ngOnInit() {
+
+    const roleJSON = localStorage.getItem("role")
+    const roleObj = roleJSON ? parseJson(roleJSON) : null
+    this.role = roleObj as number
+
+    if(this.role === 2) {
+      this.findAvailableOfTrainer()
+        .then(classes => {
+          this.trainerClasses = classes;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      return
+    }
 
     this.findAvailable()
       .then(classes => {
@@ -65,15 +92,24 @@ export class TrainerClassesComponent implements OnInit {
       .catch(error => {
         console.error('Error:', error);
       });
-
-    const roleJSON = localStorage.getItem("role")
-    const roleObj = roleJSON ? parseJson(roleJSON) : null
-    this.role = roleObj as number
   }
 
   findAvailable(): Promise<TrainerClass[]> {
     return new Promise((resolve, reject) => {
       this.trainerClassesService.findAvailable().subscribe(classes => {
+        resolve(classes);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
+  findAvailableOfTrainer(): Promise<TrainerClass[]> {
+
+    if(!this.userObj)
+      throw new Error("No trainer specified")
+
+    return new Promise((resolve, reject) => {
+      this.trainerClassesService.findAvailableOfTrainer(this.userObj._id).subscribe(classes => {
         resolve(classes);
       }, error => {
         reject(error);
@@ -133,14 +169,28 @@ export class TrainerClassesComponent implements OnInit {
     }
   }
   isWeekdaySelected(option: string): boolean {
-    return this.filterDTO.chosenWeekdays.includes(option)
+    if(this.isModalOpen) {
+      return this.chosenModalWeekdays.includes(option)
+    }
+    else return this.filterDTO.chosenWeekdays.includes(option)
   }
   onCheckboxChange(option: string) {
-    const index = this.filterDTO.chosenWeekdays.indexOf(option);
-    if (index === -1) {
-      this.filterDTO.chosenWeekdays.push(option);
-    } else {
-      this.filterDTO.chosenWeekdays.splice(index, 1);
+    if(this.isModalOpen) {
+      const index = this.chosenModalWeekdays.indexOf(option);
+      if (index === -1) {
+        this.chosenModalWeekdays.push(option);
+      } else {
+        this.chosenModalWeekdays.splice(index, 1);
+      }
+      console.log(this.chosenModalWeekdays)
+    }
+    else {
+      const index = this.filterDTO.chosenWeekdays.indexOf(option);
+      if (index === -1) {
+        this.filterDTO.chosenWeekdays.push(option);
+      } else {
+        this.filterDTO.chosenWeekdays.splice(index, 1);
+      }
     }
   }
   applyFilters() {
@@ -183,5 +233,33 @@ export class TrainerClassesComponent implements OnInit {
       },
       complete: () => {}
     });
+  }
+
+  openModal() {
+    this.isModalOpen = true
+  }
+
+  addClass() {
+    console.log(this.chosenModalWeekdays)
+    this.newClass.weekdays = this.chosenModalWeekdays
+    return this.trainerClassesService.createClass(this.newClass).pipe(
+      take(1),
+      switchMap(async () => {
+        this.trainerClasses = await this.findAvailableOfTrainer()
+        this.isModalOpen = false
+      })
+    ).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+      error: (error: any) => {
+        console.error('Error: ', error);
+      },
+      complete: () => {}
+    });
+  }
+
+  closeModal() {
+    this.isModalOpen = false
   }
 }

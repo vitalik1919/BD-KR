@@ -4,6 +4,7 @@ import {TrainerClass} from "../../../entities/trainerClass";
 import {HttpClient} from "@angular/common/http";
 import {Customer, Gender} from "../../../entities/customer";
 import {TrainerClassFilterDTO} from "../../../entities/trainerClassFilterDTO";
+import {parseJson} from "@angular/cli/src/utilities/json-file";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,22 @@ export class TrainerClassesService {
 
   findAvailable() {
     return this.http.get<any[]>(`http://localhost:3000/trainer-classes/available`).pipe(
+      map(response => {
+        return response.map(item => new TrainerClass(
+          item.trainerClass_id,
+          item.trainer_first_name,
+          item.trainer_last_name,
+          item.trainerClass_price,
+          item.trainerClass_start_time,
+          item.trainerClass_end_time,
+          item.trainerClass_weekdays.weekdays
+        ));
+      })
+    );
+  }
+
+  findAvailableOfTrainer(id : number) {
+    return this.http.get<any[]>(`http://localhost:3000/trainer-classes/trainer/available/${id}`).pipe(
       map(response => {
         return response.map(item => new TrainerClass(
           item.trainerClass_id,
@@ -76,5 +93,29 @@ export class TrainerClassesService {
 
   deleteClass(id : number) {
     return this.http.delete<void>(`http://localhost:3000/trainer-classes/${id}`)
+  }
+
+  createClass(tclass : TrainerClass) {
+
+    const trainerJSON = localStorage.getItem('user')
+    const trainer = trainerJSON ? parseJson(trainerJSON) : null
+
+    const body = {
+      price: tclass.price,
+      weekdays: {
+        weekdays: tclass.weekdays
+      },
+      start_time: tclass.start_time,
+      end_time: tclass.end_time,
+      trainer: {
+        id: trainer._id,
+        first_name: trainer._first_name,
+        last_name: trainer._last_name,
+        wage: trainer._wage,
+        specialty: trainer._specialty
+      }
+    }
+    console.log(body)
+    return this.http.post<void>(`http://localhost:3000/trainer-classes`, body)
   }
 }

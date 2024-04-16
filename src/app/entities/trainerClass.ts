@@ -1,4 +1,31 @@
 export class TrainerClass {
+  set id(value: number) {
+    this._id = value;
+  }
+
+  set fname(value: string) {
+    this._fname = value;
+  }
+
+  set lname(value: string) {
+    this._lname = value;
+  }
+
+  set price(value: number) {
+    this._price = value;
+  }
+
+  set start_time(value: string) {
+    this._start_time = value;
+  }
+
+  set end_time(value: string) {
+    this._end_time = value;
+  }
+
+  set weekdays(value: string[]) {
+    this._weekdays = value;
+  }
 
   constructor(private _id : number, private _fname : string, private _lname : string, private _price : number, private _start_time : string,
               private _end_time : string, private _weekdays : string[]) { }
