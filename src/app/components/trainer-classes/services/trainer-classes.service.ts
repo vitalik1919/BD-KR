@@ -23,7 +23,7 @@ export class TrainerClassesService {
           item.trainerClass_price,
           item.trainerClass_start_time,
           item.trainerClass_end_time,
-          item.trainerClass_weekdays.weekdays
+          JSON.parse(item.trainerClass_weekdays).weekdays
         ));
       })
     );
@@ -39,7 +39,7 @@ export class TrainerClassesService {
           item.trainerClass_price,
           item.trainerClass_start_time,
           item.trainerClass_end_time,
-          item.trainerClass_weekdays.weekdays
+          JSON.parse(item.trainerClass_weekdays).weekdays
         ));
       })
     );
@@ -85,7 +85,7 @@ export class TrainerClassesService {
           item.price,
           item.start_time,
           item.end_time,
-          item.weekdays.weekdays
+          JSON.parse(item.weekdays).weekdays
         ));
       })
     );
@@ -102,9 +102,7 @@ export class TrainerClassesService {
 
     const body = {
       price: tclass.price,
-      weekdays: {
-        weekdays: tclass.weekdays
-      },
+      weekdays: JSON.stringify({weekdays: tclass.weekdays}),
       start_time: tclass.start_time,
       end_time: tclass.end_time,
       trainer: {

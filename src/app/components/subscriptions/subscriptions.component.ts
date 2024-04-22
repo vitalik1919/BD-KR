@@ -48,9 +48,9 @@ export class SubscriptionsComponent implements OnInit {
     { label: '365 days', id: 'group-checkbox8', value: 365}
   ];
   timeOptions = [
-    { label: 'Morning', id: 'group-checkbox9', startTime: '07:00', endTime: '12:00'},
-    { label: 'Afternoon', id: 'group-checkbox10', startTime: '12:00', endTime: '17:00'},
-    { label: 'Evening', id: 'group-checkbox11', startTime: '17:00', endTime: '22:00'},
+    { label: 'Morning', id: 'group-checkbox9', startTime: '07:00', endTime: '13:00'},
+    { label: 'Afternoon', id: 'group-checkbox10', startTime: '12:00', endTime: '18:00'},
+    { label: 'Evening', id: 'group-checkbox11', startTime: '16:00', endTime: '22:00'},
     { label: 'All Day', id: 'group-checkbox12', startTime: '07:00', endTime: '22:00'}
   ];
 

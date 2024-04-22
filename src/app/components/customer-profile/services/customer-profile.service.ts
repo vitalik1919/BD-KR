@@ -20,7 +20,7 @@ export class CustomerProfileService {
           item.trainerClass_price,
           item.trainerClass_start_time,
           item.trainerClass_end_time,
-          item.trainerClass_weekdays.weekdays
+          JSON.parse(item.trainerClass_weekdays).weekdays
         ));
       })
     );
