@@ -8,10 +8,14 @@ export class AccountingService {
 
   constructor(private http : HttpClient) { }
 
-  getMonthlyIncomeData() {
-    return this.http.get<any>('http://localhost:3000/incomes/monthly')
+  getMonthlyIncomeData(months : number) {
+    return this.http.get<any>(`http://localhost:3000/incomes/monthly/${months}`)
   }
-  getMonthlyExpenseData() {
-    return this.http.get<any>('http://localhost:3000/expenses/monthly')
+  getMonthlyExpenseData(months : number) {
+    return this.http.get<any>(`http://localhost:3000/expenses/monthly/${months}`)
+  }
+
+  getSubscriptionsData() {
+    return this.http.get<any>('http://localhost:3000/bought-subscriptions/json')
   }
 }

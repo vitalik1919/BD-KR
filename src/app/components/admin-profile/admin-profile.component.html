@@ -12,7 +12,8 @@
       <span class="text">Wage: {{ currentAdmin.wage + '$'}}</span>
       <span class="text">Corporate address:<br>{{currentAdmin.email}}</span>
       <span class="text">Registration date: {{getShortDate(currentAdmin.regDate)}}</span>
-      <div class="line bot-line"></div>
+      <button style="margin-left: 1vw;" class="export" (click)="getSubscriptionsData()">Export Subscriptions</button>
+      <div class="line"></div>
     </div>
 
   </div>
@@ -22,8 +23,18 @@
 
     <span class="main-title">Gym Statistics</span>
     <div class="chart-background">
-      <ngx-charts-line-chart
-        [view]="[900, 420]"
+      <div class="chart-options-container">
+        <select style="margin-top: -0.1vh;" class="months-select" [(ngModel)]="monthsCount">
+          <option value="2">Last 2 Months</option>
+          <option value="3">Last 3 Months</option>
+          <option value="6">Last 6 Months</option>
+          <option value="12">Last 12 Months</option>
+        </select>
+        <button style="margin-left: 0.5vw; width: 4vw; height: 3.5vh; font-size: 0.9vw;"
+                class="export" (click)="getChartData()">Apply</button>
+      </div>
+      <ngx-charts-line-chart style="margin-left: 2vw;"
+        [view]="[1000, 375]"
         [xAxis]="true"
         [yAxis]="true"
         [showXAxisLabel]="true"
@@ -44,6 +55,42 @@
 
 <style>
 
+  .chart-options-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  .months-select {
+    background-color: rgba(0, 0, 0, 0.80);
+    border: none;
+    border-radius: 0.5vw;
+    width: 8.5vw;
+    height: 4vh;
+    color: #BEBEBE;
+    font-size: 1vw;
+    margin-top: 0.8vw;
+  }
+  .export {
+    color: #ffffff;
+    background-color: #3B9972;
+    border: none;
+    border-radius: 0.35vw;
+    font-family: "Pragati Narrow", sans-serif;
+    font-style: normal;
+    font-size: 1vw;
+    width: 8vw;
+    height: 5vh;
+  }
+  .export:hover {
+    background-color: #40a67b;
+    cursor: pointer;
+  }
+  .export:active {
+    background-color: #45b686;
+  }
   ::ng-deep .ngx-charts text {
     fill: #fff;
     font-family: 'Pragati Narrow', sans-serif;
