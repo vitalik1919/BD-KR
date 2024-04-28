@@ -22,4 +22,8 @@ export class AccountingService {
   getBoughtSubscriptionsMonthly() {
     return this.http.get<any>('http://localhost:3000/bought-subscriptions/monthly')
   }
+
+  getProtocolData(hoursCount : number) {
+    return this.http.get<any>(`http://localhost:3000/protocols/${hoursCount}`)
+  }
 }

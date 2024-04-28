@@ -29,6 +29,7 @@ export class AdminProfileComponent implements OnInit {
   results: { name: string; series: { value: number; name: string }[] }[] = []
   results_sub: { name: string; series: { value: number; name: string }[] }[] = []
   monthsCount : number = 12
+  hoursCount: number = 24;
   constructor(private accountingService : AccountingService) {
   }
   ngOnInit() {
@@ -97,4 +98,17 @@ export class AdminProfileComponent implements OnInit {
     });
   }
 
+  exportProtocol() {
+    this.accountingService.getProtocolData(this.hoursCount).subscribe(
+      (jsonData: any[]) => {
+        const result: string[] = jsonData.map(item => JSON.stringify(item));
+        const resultString = result.join('\n');
+        const jsonBlob = new Blob([resultString], { type: 'text/plain' });
+        saveAs(jsonBlob, 'protocol_history.txt');
+      },
+      (error) => {
+        console.error('Error fetching protocol history data:', error);
+      }
+    );
+  }
 }

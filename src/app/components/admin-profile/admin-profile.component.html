@@ -12,6 +12,14 @@
       <span class="text">Wage: {{ currentAdmin.wage + '$'}}</span>
       <span class="text">Corporate address:<br>{{currentAdmin.email}}</span>
       <span class="text">Registration date: {{getShortDate(currentAdmin.regDate)}}</span>
+      <div class="protocol-data">
+        <select style='margin-left: 1vw;' class="months-select" [(ngModel)]="hoursCount">
+          <option value="1">Last hour</option>
+          <option value="24">Last day</option>
+          <option value="148">Last week</option>
+        </select>
+        <button style='margin-left: 0.5vw;' class="export" (click)="exportProtocol()">Export Protocol</button>
+      </div>
       <div class="line"></div>
     </div>
 
