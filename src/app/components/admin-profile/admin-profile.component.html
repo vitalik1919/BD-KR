@@ -12,7 +12,6 @@
       <span class="text">Wage: {{ currentAdmin.wage + '$'}}</span>
       <span class="text">Corporate address:<br>{{currentAdmin.email}}</span>
       <span class="text">Registration date: {{getShortDate(currentAdmin.regDate)}}</span>
-      <button style="margin-left: 1vw;" class="export" (click)="getSubscriptionsData()">Export Subscriptions</button>
       <div class="line"></div>
     </div>
 
@@ -23,9 +22,11 @@
 
     <span class="main-title">Gym Statistics</span>
     <div class="chart-background">
+      <div class="sub-title">
+        <span class="title" style="font-size: 1.75vw;">Accounting</span>
+      </div>
       <div class="chart-options-container">
         <select style="margin-top: -0.1vh;" class="months-select" [(ngModel)]="monthsCount">
-          <option value="2">Last 2 Months</option>
           <option value="3">Last 3 Months</option>
           <option value="6">Last 6 Months</option>
           <option value="12">Last 12 Months</option>
@@ -47,6 +48,25 @@
         [showGridLines]="true"
         [animations]="false">
       </ngx-charts-line-chart>
+
+      <div class="sub-title">
+        <span class="title" style="font-size: 1.75vw;">Subscriptions</span>
+      </div>
+
+      <div class="chart-options-container">
+        <button class="export" (click)="getSubscriptionsData()">Export JSON</button>
+      </div>
+      <ngx-charts-line-chart style="margin-left: 2vw; margin-top: 1vw;"
+        [view]="[1000, 375]"
+        [xAxis]="true" [yAxis]="true" [showXAxisLabel]="true" [xAxisLabel]="'Months'"
+        [showYAxisLabel]="true"
+        [yAxisLabel]="'Count'"
+        [results]="results_sub"
+        [legend]="true"
+        [legendTitle]="''"
+        [showGridLines]="true"
+        [animations]="false">
+      </ngx-charts-line-chart>
     </div>
 
   </div>
@@ -55,6 +75,12 @@
 
 <style>
 
+  .sub-title {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
   .chart-options-container {
     display: flex;
     flex-direction: row;
@@ -81,8 +107,8 @@
     font-family: "Pragati Narrow", sans-serif;
     font-style: normal;
     font-size: 1vw;
-    width: 8vw;
-    height: 5vh;
+    width: 6vw;
+    height: 4vh;
   }
   .export:hover {
     background-color: #40a67b;
@@ -108,14 +134,13 @@
     background-color: rgba(0,0,0,0.60);
     border: none;
     border-radius: 0.6vw;
-    width: 80%;
-    height: 90%;
+    width: 95%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding-left: 3vw;
-    padding-top: 2vh;
+    overflow-y: auto;
   }
   .container {
     padding-top: 20vh;

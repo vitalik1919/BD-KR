@@ -45,7 +45,7 @@ export class SubscriptionsComponent implements OnInit {
     { label: '30 days', id: 'group-checkbox5', value: 30},
     { label: '90 days', id: 'group-checkbox6', value: 90},
     { label: '180 days', id: 'group-checkbox7', value: 180},
-    { label: '365 days', id: 'group-checkbox8', value: 365}
+    { label: '360 days', id: 'group-checkbox8', value: 360}
   ];
   timeOptions = [
     { label: 'Morning', id: 'group-checkbox9', startTime: '07:00', endTime: '13:00'},
@@ -207,7 +207,7 @@ export class SubscriptionsComponent implements OnInit {
         console.log(response);
       },
       error: (error: any) => {
-        console.error('Error: ', error);
+        alert('Cannot delete a subscription.\nPerhaps, it\'s an active subscription for someone.');
       },
       complete: () => {}
     });

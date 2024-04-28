@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavMenuComponent} from "../nav-menu/nav-menu.component";
 import {NgForOf} from "@angular/common";
 import {Admin} from "../../entities/admin";
-import {LineChartModule} from "@swimlane/ngx-charts";
+import {BarChartModule, LineChartModule} from "@swimlane/ngx-charts";
 import {AccountingService} from "./services/accounting.service";
 import {saveAs} from "file-saver";
 import {FormsModule} from "@angular/forms";
@@ -14,7 +14,8 @@ import {FormsModule} from "@angular/forms";
     NavMenuComponent,
     NgForOf,
     LineChartModule,
-    FormsModule
+    FormsModule,
+    BarChartModule
   ],
   templateUrl: './admin-profile.component.html',
   styleUrl: './admin-profile.component.css'
@@ -26,7 +27,8 @@ export class AdminProfileComponent implements OnInit {
   currentAdmin = this.adminObj as Admin
 
   results: { name: string; series: { value: number; name: string }[] }[] = []
-  monthsCount : number = 6
+  results_sub: { name: string; series: { value: number; name: string }[] }[] = []
+  monthsCount : number = 12
   constructor(private accountingService : AccountingService) {
   }
   ngOnInit() {
@@ -70,6 +72,10 @@ export class AdminProfileComponent implements OnInit {
             series: incomeData.map(item => ({ value: item.value, name: item.name }))
           }
         ];
+        // Add all but the first item to this.results
+        this.results.forEach(result => {
+          result.series = result.series.slice(1);
+        });
         console.log(this.results);
       }, error => {
         console.error("Error fetching expense data:", error);
@@ -77,5 +83,18 @@ export class AdminProfileComponent implements OnInit {
     }, error => {
       console.error("Error fetching income data:", error);
     });
+
+    this.accountingService.getBoughtSubscriptionsMonthly().subscribe((subData: any[]) => {
+      this.results_sub = [
+        {
+          name: "Subscriptions",
+          series: subData.map(item => ({ value: item.value, name: item.name }))
+        }
+      ];
+      console.log(this.results_sub);
+    }, error => {
+      console.error("Error fetching expense data:", error);
+    });
   }
+
 }

@@ -18,4 +18,8 @@ export class AccountingService {
   getSubscriptionsData() {
     return this.http.get<any>('http://localhost:3000/bought-subscriptions/json')
   }
+
+  getBoughtSubscriptionsMonthly() {
+    return this.http.get<any>('http://localhost:3000/bought-subscriptions/monthly')
+  }
 }
