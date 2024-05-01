@@ -223,7 +223,7 @@ export class TrainerClassesComponent implements OnInit {
     return this.trainerClassesService.deleteClass(id).pipe(
       take(1),
       switchMap(async () => {
-        await this.findAvailable();
+        this.trainerClasses = await this.findAvailable();
       })
     ).subscribe({
       next: (response: any) => {

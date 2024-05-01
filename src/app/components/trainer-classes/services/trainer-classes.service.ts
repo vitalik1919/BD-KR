@@ -76,7 +76,15 @@ export class TrainerClassesService {
       endTime: filterDTO.endTime
     }
 
-    return this.http.post<any[]>(`http://localhost:3000/trainer-classes/filtered`, filterData).pipe(
+    const roleJSON = localStorage.getItem("role")
+    const roleObj = roleJSON ? parseJson(roleJSON) : null
+    const role = roleObj as number
+
+    const userJSON = localStorage.getItem("user")
+    const userObj = userJSON ? parseJson(userJSON) : null
+    const userId = userObj._id as number
+
+    return this.http.post<any[]>(`http://localhost:3000/trainer-classes/filtered/${role}/${userId}`, filterData).pipe(
       map(response => {
         return response.map(item => new TrainerClass(
           item.id,

@@ -73,10 +73,10 @@ export class AdminProfileComponent implements OnInit {
             series: incomeData.map(item => ({ value: item.value, name: item.name }))
           }
         ];
-        // Add all but the first item to this.results
-        this.results.forEach(result => {
-          result.series = result.series.slice(1);
-        });
+        // // Add all but the first item to this.results
+        // this.results.forEach(result => {
+        //   result.series = result.series.slice(1);
+        // });
         console.log(this.results);
       }, error => {
         console.error("Error fetching expense data:", error);
